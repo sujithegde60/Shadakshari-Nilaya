@@ -22,7 +22,7 @@
     select
     {
         border-radius: 10px;
-        width: 150px;
+        width: 160px;
         margin-top: 15px;
         margin-bottom: 5px;
         height: 25px;
@@ -30,8 +30,8 @@
 
     }
     body {
-            margin-left: 500px;           
-            background-color: #b2c781; /* Light gray background */
+            margin-left: 400px;           
+            background-color: #daebb3; /* Light gray background */
             color: #333; /* Dark gray text color */
             font-family: 'Arial', sans-serif;
             background-position: center;
@@ -51,7 +51,7 @@
         .outerbox
         {   border-width: 5px;
             border-radius: 25px;
-            border-color: rgb(189, 129, 129);
+            border-color: rgb(11, 55, 199);
             border-style:groove;
             width: 500px;
             display: flex;
@@ -65,13 +65,14 @@
     .outerbox {
         width: auto;
         margin: 0 auto; /* Center the outerbox horizontally */
+        
     }
 
     input, select {
         width: auto;
     }
 
-    ul {
+    ol {
         text-align: center; /* Center the list items horizontally */
     }
 
@@ -90,93 +91,109 @@
             margin-left: 40px;
             text-transform: uppercase;
         }
+        #toprint
+        {
+           /*background-color: #daebb3;*/
+           margin: 0 auto;
+        }
+        #printButton
+        {
+            font-size: large;
+        }
 </style>
 
 </head>
 <body>
-    <div id="toprint">
-        <img src="./static/logo.jpg" style="width: 200px;margin-left: 150px; border-radius: 100px; height: 100px;"> 
-        <h2> Booking confirmation receipt</h2>
+    <div style="display: flex;"> 
+            <div id="toprint">
+                <img src="./static/logo.jpg" style="width: 200px;margin-left: 150px; border-radius: 100px; height: 100px;"> 
+                <h2> Booking confirmation receipt</h2>
 
-        <div class="outerbox"> 
-                <div> 
-                    <div >
-                        <h4>Guest name</h4> 
-                    </div>
-                    <div > 
-                        <h4>Check-in Date</h4> 
-                    </div>
-                    <div >
-                        <h4>Check-Out Date</h4> 
-                    </div>
-                    <div >
-                        <h4>Number of rooms</h4> 
-                    </div>
-                    <div >
-                        <h4>Number of Persons</h4> 
-                    </div>
-                    <div >
-                        <h4>Room type</h4> 
-                    </div>
-                    <div >
-                        <h4>Total number of days</h4>
-                    </div>
-                    <div >
-                        <h4>Total price</h4> 
-                    </div>
-                    <div >
-                        <h4>Advance paid</h4>
-                    </div>
-                    <div >
-                        <h4>Remaining balance</h4>
-                    </div>
-                        
-                    <div >
-                        <h4>Check in time</h4>
-                    </div>
-                        
-                    <div > 
-                        <h4>Check out time</h4>
-                    </div>
+                <div class="outerbox"> 
+                        <div> 
+                            <div >
+                                <h4>Guest name</h4> 
+                            </div>
+                            <div > 
+                                <h4>Check-in Date</h4> 
+                            </div>
+                            <div >
+                                <h4>Check-Out Date</h4> 
+                            </div>
+                            <div >
+                                <h4>Number of rooms</h4> 
+                            </div>
+                            <div >
+                                <h4>Number of Persons</h4> 
+                            </div>
+                            <div >
+                                <h4>Room type</h4> 
+                            </div>
+                            <div >
+                                <h4>Total number of days</h4>
+                            </div>
+                            <div >
+                                <h4>Total price</h4> 
+                            </div>
+                            <div >
+                                <h4>Advance paid</h4>
+                            </div>
+                            <div >
+                                <h4>Remaining balance</h4>
+                            </div>
+                                
+                            <div >
+                                <h4>Check in time</h4>
+                            </div>
+                                
+                            <div style="margin-bottom: 30px;"> 
+                                <h4>Check out time</h4>
+                            </div>
+                        </div>
+
+                        <div>
+                            <input id="name" style="margin-top: 15px;" type="text">
+                            <input id="checkInDate" oninput="days()" style="margin-top: 20px;" type="date" >
+                            <input id="checkOutDate" oninput="days()" type="date">
+                            <input type="number">
+                            <input type="number">
+                            <select> 
+                                <option value="AC">AC </option>
+                                <option value="NON AC">NOn-AC</option>
+                            </select>
+                            <input id="no_days" type="number">
+                            <input id="total" oninput="balance()" type="number"> <span> ₹</span>
+                            <input id="advance" oninput="balance()" type="number" value="0"> <span> ₹</span>
+                            <input id="balance" type="number" readonly> <span> ₹</span>
+                            <input  type="time" value="11:00"> 
+                            <input style="margin-top: 15px;" type="time" value="11:00">
+                        </div>
                 </div>
+                <br> </br>
+                <ol>
+                    <li>Tariff including only rooms</li>
+                    
+                    <li>delay in check-out may cost extra charges</li>
+                    
+                    <li>Advance amount is non-refundable</li>
 
-                <div>
-                    <input id="name" style="margin-top: 15px;" type="text">
-                    <input id="checkInDate" oninput="days()" style="margin-top: 20px;" type="date" >
-                    <input id="checkOutDate" oninput="days()" type="date">
-                    <input type="number">
-                    <input type="number">
-                    <select> 
-                        <option value="AC">AC </option>
-                        <option value="NON AC">NOn-AC</option>
-                    </select>
-                    <input id="no_days" type="number">
-                    <input id="total" oninput="balance()" type="number"> <span> ₹</span>
-                    <input id="advance" oninput="balance()" type="number" value="0"> <span> ₹</span>
-                    <input id="balance" type="number" readonly> <span> ₹</span>
-                    <input  type="time" value="11:00"> 
-                    <input style="margin-top: 15px;" type="time" value="11:00">
-                </div>
-        </div>
+                </ol>
+                <br> </br>
+                <br> </br>
+                <h4 style="margin-left: 200px;">
+                    Thank You
+                </h4>
+                <h4 style="color: red;margin-left: 165px;margin-top: 5px;" >SHADAXARI NILAYA</h4>
+                <h4 style="margin-left: 145px;margin-top: 5px;">BELEHITTALA,GOKARNA</h4>
+                <h4 style="margin-left: 115px;margin-top: 5px; width: 300px;">+91-9108239824/+91-9919694929</h4>
+            </div>
 
-        <ul>
-            <li>Tariff including only rooms</li>
-            
-            <li>delay in check-out may cost extra charges</li>
-            
-            <li>Advance amount is non-refundable</li>
-
-        </ul>
-        <h4 style="margin-left: 200px;">
-            Thank You
-        </h4>
-        <h4 style="color: red;margin-left: 165px;margin-top: 5px;" >SHADAXARI NILAYA</h4>
-        <h4 style="margin-left: 145px;margin-top: 5px;">BELEHITTALA,GOKARNA</h4>
-        <h4 style="margin-left: 115px;margin-top: 5px; width: 300px;">+91-9108239824/+91-9919694929</h4>
-    </div>
-    <button id="printButton" onclick="print()" style="color: brown; margin-top: 20px; width: 100px; height: 30px; border-radius: 10px; margin-left: 200px;"> 
+            <button id="printButton" onclick="print()" style="color: brown; margin-top: 150px; width: 150px; height: 50px; border-radius: 10px;margin-right: 390px; margin-left: 0px;"> 
         Print
     </button>
+
+    </div>
+    
     
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js" ></script>
@@ -185,7 +202,7 @@
     {
         var element=document.getElementById("toprint")
         var name=document.getElementById("name").value
-        html2pdf(element,{margin:10,filename:`${name} Booking Receipt.pdf`,image:{type:'jpeg',quality:0.98},html2canvas:{scale:2,loggin:true,dpi:192,letterRendering:true},jsPDF: {unit:'mm',format:'a4',orientation:'portrait'}});
+        html2pdf(element,{margin:[0,40,0,0],filename:`${name} Booking Receipt.pdf`,image:{type:'jpeg',quality:0.98},html2canvas:{scale:2,loggin:true,dpi:192,letterRendering:true},jsPDF: {unit:'mm',format:'a4',orientation:'portrait'}});
         
     }
     function balance()
