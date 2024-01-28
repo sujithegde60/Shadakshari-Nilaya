@@ -4,58 +4,184 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Receipt</title>
+   
 <style>
     .input{
         display: flex;
     }
     input{
         width: 150px;
-        height: 40px;
-        border-radius: 10px;
-        margin-left: 30px;
+            height: 10px;
+            border-radius: 10px;
+            margin-left: 10px;
+            margin-top: 10px;
+            border: 2px solid #0077cc; /* Blue border for input */
+            padding: 5px;
+            margin-bottom: 5px;
     }
+    select
+    {
+        border-radius: 10px;
+        width: 150px;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        height: 25px;
+        margin-left: 10px;
+
+    }
+    body {
+            margin-left: 500px;           
+            background-color: #b2c781; /* Light gray background */
+            color: #333; /* Dark gray text color */
+            font-family: 'Arial', sans-serif;
+            background-position: center;
+        }
+        h4 {
+            color: #0077cc; /* Blue for heading text */
+            margin-bottom: 5px;
+            margin-left: 50px;
+            width: 200px;
+        }
+        h2 {
+            color: #004080; /* Dark blue for main heading */
+            margin-left: 40px;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-transform: uppercase;
+        }
+        .outerbox
+        {   border-width: 5px;
+            border-radius: 25px;
+            border-color: red;
+            border-style:groove;
+            width: 500px;
+            display: flex;
+        }
+        @media print {
+            body {
+                display: block;
+                margin: 0;
+            }
+            .outerbox {
+                width: auto;
+            }
+            input, select {
+                width: auto;
+            }
+        }
 </style>
+
 </head>
-<body>
-    <h1> Booking confirmation receipt</h1>
-    <div class="input">
-        <h2>Guest name</h2> <input>
+<body >
+    <div id="tpprint">
+        <img src="./static/logo.jpg" style="width: 200px;margin-left: 150px; border-radius: 100px; height: 100px;"> 
+        <h2> Booking confirmation receipt</h2>
+
+        <div class="outerbox"> 
+                <div> 
+                    <div >
+                        <h4>Guest name</h4> 
+                    </div>
+                    <div > 
+                        <h4>Check-in Date</h4> 
+                    </div>
+                    <div >
+                        <h4>Check-Out Date</h4> 
+                    </div>
+                    <div >
+                        <h4>Number of rooms</h4> 
+                    </div>
+                    <div >
+                        <h4>Number of Persons</h4> 
+                    </div>
+                    <div >
+                        <h4>Room type</h4> 
+                    </div>
+                    <div >
+                        <h4>Total number of days</h4>
+                    </div>
+                    <div >
+                        <h4>Total price</h4> 
+                    </div>
+                    <div >
+                        <h4>Advance paid</h4>
+                    </div>
+                    <div >
+                        <h4>Remaining balance</h4>
+                    </div>
+                        
+                    <div >
+                        <h4>Check in time</h4>
+                    </div>
+                        
+                    <div > 
+                        <h4>Check out time</h4>
+                    </div>
+                </div>
+
+                <div>
+                    <input id="name" style="margin-top: 15px;" type="text">
+                    <input id="checkInDate" oninput="days()" style="margin-top: 20px;" type="date" >
+                    <input id="checkOutDate" oninput="days()" type="date">
+                    <input type="number">
+                    <input type="number">
+                    <select> 
+                        <option value="AC">AC </option>
+                        <option value="NON AC">NOn-AC</option>
+                    </select>
+                    <input id="no_days" type="number">
+                    <input id="total" oninput="balance()" type="number"> <span> ₹</span>
+                    <input id="advance" oninput="balance()" type="number" value="0"> <span> ₹</span>
+                    <input id="balance" type="number" readonly> <span> ₹</span>
+                    <input  type="time" value="11:00"> 
+                    <input style="margin-top: 15px;" type="time" value="11:00">
+                </div>
+        </div>
     </div>
-    <div class="input"> 
-         <h2>Check-in Date</h2> <input>
-    </div>
-    <div class="input">
-        <h2>Check-Out Date</h2> <input>
-    </div>
-    <div class="input">
-        <h2>Number of rooms</h2> <input>
-    </div>
-    <div class="input">
-        <h2>Number of Persons</h2> <input>
-    </div>
-    <div class="input">
-        <h2>Room type</h2> <input>
-    </div>
-    <div class="input">
-        <h2>Total number of days</h2> <input>
-    </div>
-    <div class="input">
-        <h2>Total price</h2> <input>
-    </div>
-    <div class="input">
-        <h2>Advance paid</h2><input>
-    </div>
-    <div class="input">
-        <h2>Remaining balance</h2><input>
-    </div>
-        
-    <div class="input">
-        <h2>Check in time</h2><input>
-    </div>
-        
-    <div class="input"> 
-        <h2>Check out time</h2><input>
-    </div>
+    <button id="printButton" onclick="print()" style="color: brown; margin-top: 20px; width: 100px; height: 30px; border-radius: 10px; margin-left: 220px;"> 
+        Print
+    </button>
     
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js" ></script>
+<script>
+    function print()
+    {
+        var element=document.getElementById("toprint")
+        var name=document.getElementById("name")
+        html2pdf(element,{margin:10,filename:'${name}.pdf',html2canvas:{scale:2,loggin:true,dpi:192,letterRendering:true},jsPDF: {unit:'mm',format:'a4',orientation:'portrait'}});
+        //window.print();
+
+    }
+    function balance()
+    {
+        const total=parseFloat(document.getElementById('total').value)||0;
+        const advance=parseFloat(document.getElementById('advance').value)||0;
+        const balance=total-advance;
+        document.getElementById('balance').value = balance.toFixed(0);
+    }
+    function days()
+    {
+        const checkInDate = new Date(document.getElementById('checkInDate').value);
+        const checkOutDate = new Date(document.getElementById('checkOutDate').value);
+
+        // Calculate the difference in milliseconds
+        const timeDifference = checkOutDate - checkInDate;
+
+        // Convert milliseconds to days
+        const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+
+        if (daysDifference<0)
+        {
+            alert(`Enter valid checkout-date`); 
+            
+        }
+        else
+        {
+            document.getElementById("no_days").value=daysDifference;
+        }
+        
+        
+    }
+   
+</script>
 </html>
