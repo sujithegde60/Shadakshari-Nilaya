@@ -57,22 +57,44 @@
             display: flex;
         }
         @media print {
-            body {
-                display: block;
-                margin: 0;
-            }
-            .outerbox {
-                width: auto;
-            }
-            input, select {
-                width: auto;
-            }
+    body {
+        display: block;
+        margin: 0;
+    }
+
+    .outerbox {
+        width: auto;
+        margin: 0 auto; /* Center the outerbox horizontally */
+    }
+
+    input, select {
+        width: auto;
+    }
+
+    ul {
+        text-align: center; /* Center the list items horizontally */
+    }
+
+    h4 {
+        margin: 0 auto; /* Center the h4 elements horizontally */
+    }
+
+    img {
+        margin: 0 auto; /* Center the image horizontally */
+        display: block; /* Make the image a block element */
+    }
+}
+        li
+        {
+            color: #0077cc;
+            margin-left: 60px;
+            text-transform: uppercase;
         }
 </style>
 
 </head>
-<body >
-    <div id="tpprint">
+<body>
+    <div id="toprint">
         <img src="./static/logo.jpg" style="width: 200px;margin-left: 150px; border-radius: 100px; height: 100px;"> 
         <h2> Booking confirmation receipt</h2>
 
@@ -136,6 +158,21 @@
                     <input style="margin-top: 15px;" type="time" value="11:00">
                 </div>
         </div>
+
+        <ul>
+            <li>Tariff including only rooms</li>
+            
+            <li>delay in check-out may cost extra charges</li>
+            
+            <li>Advance amount is non-refundable</li>
+
+        </ul>
+        <h4 style="margin-left: 200px;">
+            Thank You
+        </h4>
+        <h4 style="color: red;margin-left: 165px;margin-top: 5px;" >SHADAXARI NILAYA</h4>
+        <h4 style="margin-left: 145px;margin-top: 5px;">BELEHITTALA,GOKARNA</h4>
+        <h4 style="margin-left: 115px;margin-top: 5px; width: 300px;">+91-9108239824/+91-9919694929</h4>
     </div>
     <button id="printButton" onclick="print()" style="color: brown; margin-top: 20px; width: 100px; height: 30px; border-radius: 10px; margin-left: 220px;"> 
         Print
@@ -147,10 +184,9 @@
     function print()
     {
         var element=document.getElementById("toprint")
-        var name=document.getElementById("name")
-        html2pdf(element,{margin:10,filename:'${name}.pdf',html2canvas:{scale:2,loggin:true,dpi:192,letterRendering:true},jsPDF: {unit:'mm',format:'a4',orientation:'portrait'}});
-        //window.print();
-
+        var name=document.getElementById("name").value
+        html2pdf(element,{margin:10,filename:`${name} Booking Receipt.pdf`,image:{type:'jpeg',quality:0.98},html2canvas:{scale:2,loggin:true,dpi:192,letterRendering:true},jsPDF: {unit:'mm',format:'a4',orientation:'portrait'}});
+        
     }
     function balance()
     {
